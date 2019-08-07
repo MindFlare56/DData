@@ -32,7 +32,7 @@ class Tools {
             return property.get(instance)
         }
 
-        internal fun containsPropertyValue(
+        fun containsPropertyValue(
                 list: MutableList<*>,
                 kMutableProperty1: KMutableProperty1<*, String>,
                 value: String
@@ -45,7 +45,7 @@ class Tools {
             return false
         }
 
-        internal fun generateSerialNumber(
+        fun generateSerialNumber(
                 charSet: String = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ123456789",
                 length: Long = 20,
                 invalidCharSet: String = "4Fu",
@@ -59,7 +59,7 @@ class Tools {
             ).joinToString("")
         }
 
-        internal inline fun <reified T> findAnnotation(kProperty1: KMutableProperty1<*, *>): T? {
+        inline fun <reified T> findAnnotation(kProperty1: KMutableProperty1<*, *>): T? {
             val annotations = kProperty1.javaField!!.annotations
             for (annotation in annotations) {
                 if (annotation::class == T::class) {
@@ -69,7 +69,7 @@ class Tools {
             return null
         }
 
-        internal fun findAnnotation(kProperty1: KMutableProperty1<*, *>, kClass: KClass<*>): Annotation? { //todo fix
+        fun findAnnotation(kProperty1: KMutableProperty1<*, *>, kClass: KClass<*>): Annotation? { //todo fix
             val annotations = kProperty1.javaField!!.annotations
             for (annotation in annotations) {
                 if (annotation::class == kClass::class) {

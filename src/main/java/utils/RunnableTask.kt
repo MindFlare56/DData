@@ -4,16 +4,16 @@ import java.util.*
 
 abstract class RunnableTask(private val message: String = "Task complete", private val displayProgress: Boolean = true) : Runnable {
 
-    internal var conditionsDone: MutableMap<String, Boolean> = HashMap()
+    var conditionsDone: MutableMap<String, Boolean> = HashMap()
     var progress = intArrayOf(0)
-    internal var isRunning = booleanArrayOf(false)
+    var isRunning = booleanArrayOf(false)
     abstract override fun run()
     internal abstract fun progress()  // user has to set the progress after condition is done
-    internal open fun end() {}
+    open fun end() {}
     private var i = 0
 
     //todo make a builder patter to avoid putting default value each time
-    internal fun start(refreshRateMilliseconds: Int) {
+    fun start(refreshRateMilliseconds: Int) {
         val timer = Timer()
         timer.schedule(object : TimerTask() {
             override fun run() {
@@ -36,7 +36,7 @@ abstract class RunnableTask(private val message: String = "Task complete", priva
         }, 0, refreshRateMilliseconds.toLong())
     }
 
-    internal fun atProgress(progress: Int, function: () -> Unit, message: String = "", progressAmount: Int = 100 - progress) {
+    fun atProgress(progress: Int, function: () -> Unit, message: String = "", progressAmount: Int = 100 - progress) {
         if (getCurrentProgress() == progress) {
             function()
             setProgress(progress + progressAmount)
@@ -44,7 +44,7 @@ abstract class RunnableTask(private val message: String = "Task complete", priva
         }
     }
 
-    internal fun getCurrentProgress(): Int {
+    fun getCurrentProgress(): Int {
         var currentProgress = 0
         progress.forEach { value ->
             currentProgress += value
@@ -52,11 +52,11 @@ abstract class RunnableTask(private val message: String = "Task complete", priva
         return currentProgress
     }
 
-    internal fun setStartingProgress(amount: Int) {
+    fun setStartingProgress(amount: Int) {
         increaseProgress(amount)
     }
 
-    internal fun progressAfter(condition: Boolean, name: String, progressAmount: Int) {
+    fun progressAfter(condition: Boolean, name: String, progressAmount: Int) {
         if (condition) {
             if (conditionsDone[name] == null) {
                 conditionsDone[name] = true
@@ -68,32 +68,32 @@ abstract class RunnableTask(private val message: String = "Task complete", priva
         }
     }
 
-    internal fun stopTimer(timer: Timer) {
+    fun stopTimer(timer: Timer) {
         timer.cancel()
         timer.purge()
     }
 
-    internal fun increaseProgress(value: Int) {
+    fun increaseProgress(value: Int) {
         progress[0] += value //todo refactor this for the good position in the map
     }
 
-    internal fun isRunning(): Boolean {
+    fun isRunning(): Boolean {
         return isRunning[0]
     }
 
-    internal fun setProgress(progress: Int) {
+    fun setProgress(progress: Int) {
         this.progress[0] = progress
     }
 
-    internal fun getProgress(): Int {
+    fun getProgress(): Int {
         return progress[0]
     }
 
-    internal fun stopRunning() {
+    fun stopRunning() {
         isRunning[0] = false
     }
 
-    private fun defaultMessage() {
+    fun defaultMessage() {
 
     }
 }
