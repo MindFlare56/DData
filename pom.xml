@@ -58,7 +58,7 @@
         <dependency>
             <groupId>com.github.MindFlare56</groupId>
             <artifactId>KTools</artifactId>
-            <version>1.0.1</version>
+            <version>1.0.3</version>
         </dependency>
     </dependencies>
 

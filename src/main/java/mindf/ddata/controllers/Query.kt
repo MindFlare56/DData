@@ -3,11 +3,12 @@ package mindf.ddata.controllers
 import org.json.JSONObject
 import mindf.ddata.model.TableModel
 import java.sql.ResultSet
+import java.util.*
 import kotlin.reflect.KMutableProperty1
 
-abstract class Query {
+abstract class Query(databaseProperties: Properties) {
 
-    private var database = Database()
+    private var database = Database(databaseProperties)
     internal lateinit var tableModel: TableModel
     internal lateinit var modelClass: Class<out Any>
     internal lateinit var model: Any

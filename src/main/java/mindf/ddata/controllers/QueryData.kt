@@ -1,9 +1,9 @@
 package mindf.ddata.controllers
 
-import Tools.Companion.readInstanceProperty
 import mindf.ddata.model.DData
 import mindf.ddata.model.Row
 import mindf.ddata.model.TableModel
+import mindf.ktools.Tools.Companion.readInstanceProperty
 import java.util.*
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.jvm.javaField

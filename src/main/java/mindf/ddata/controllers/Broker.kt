@@ -1,18 +1,19 @@
 package mindf.ddata.controllers
 
-import Tools.Companion.readInstanceProperty
 import org.json.JSONObject
 import mindf.ddata.model.DData
+import mindf.ktools.Tools.Companion.readInstanceProperty
 import java.sql.ResultSet
+import java.util.*
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.jvm.javaField
 
-abstract class Broker {
+abstract class Broker(private val databaseProperties: Properties) {
 
     abstract val controller: Facade
 
     fun fetchAll() {
-        object : Query() {
+        object : Query(databaseProperties) {
             override fun init() {
                 modelClass = controller.modelClass
             }
@@ -23,7 +24,7 @@ abstract class Broker {
     }
 
     fun add(model: Any, function: (key: Any) -> Unit) {
-        object : Query(){
+        object : Query(databaseProperties) {
             override fun init() {
                 this.model = model
             }
@@ -34,7 +35,7 @@ abstract class Broker {
     }
 
     fun add(model: Any) {
-        object : Query(){
+        object : Query(databaseProperties) {
             override fun init() {
                 this.model = model
             }
@@ -42,7 +43,7 @@ abstract class Broker {
     }
 
     fun delete(key: String, value: Any) {
-        object : Query(){
+        object : Query(databaseProperties) {
             override fun init() {
                 modelClass = controller.modelClass
                 where = "`$key` = '$value'"
@@ -51,7 +52,7 @@ abstract class Broker {
     }
 
     fun update(model: Any, vararg properties: KMutableProperty1<*, *>, condition: String) {
-        object : Query() {
+        object : Query(databaseProperties) {
             override fun init() {
                 this.model = model
                 this.properties = properties.toList()
@@ -61,7 +62,7 @@ abstract class Broker {
     }
 
     fun update(model: Any, properties: List<KMutableProperty1<*, *>>, condition: String) {
-        object : Query() {
+        object : Query(databaseProperties) {
             override fun init() {
                 this.model = model
                 this.properties = properties
@@ -71,7 +72,7 @@ abstract class Broker {
     }
 
     fun update(model: Any, properties: List<KMutableProperty1<*, *>>, property1: KMutableProperty1<*, *>, value: Any) {
-        object : Query() {
+        object : Query(databaseProperties) {
             override fun init() {
                 this.model = model
                 this.properties = properties
@@ -81,7 +82,7 @@ abstract class Broker {
     }
 
     fun update(model: Any, properties: List<KMutableProperty1<*, *>>, property1: KMutableProperty1<*, *>) {
-        object : Query() {
+        object : Query(databaseProperties) {
             override fun init() {
                 this.model = model
                 this.properties = properties

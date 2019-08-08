@@ -2,17 +2,15 @@ package mindf.ddata.controllers
 
 import org.json.JSONObject
 import mindf.ddata.model.Row
-import java.io.IOException
+import mindf.ktools.RunnableTask
 import java.sql.*
 import java.util.*
-import RunnableTask
-import kotlin.system.exitProcess
+import kotlin.collections.ArrayList
 
 class Database
 
-internal constructor() {
+internal constructor(private val databaseProperties: Properties) {
 
-    private val properties: Properties
     private var resultSet: ResultSet? = null
 
     companion object {
@@ -26,7 +24,6 @@ internal constructor() {
     }
 
     init {
-        properties = loadDatabaseProperties()
         DataGenerator.build(this)
     }
 
@@ -132,30 +129,13 @@ internal constructor() {
         return jsonObjects
     }
 
-    private fun loadDatabaseProperties(): Properties {
-        val classLoader = Thread.currentThread().contextClassLoader
-        val properties = Properties()
-        try {
-            classLoader.getResourceAsStream("database.properties")!!.use { resourceStream ->
-                properties.load(
-                    resourceStream
-                )
-            }
-        } catch (e: IOException) {
-            e.printStackTrace()
-            throw IllegalArgumentException("database.properties file not found!")
-        }
-
-        return properties
-    }
-
     private fun createConnection(): Connection? {
         var connection: Connection? = null
         try {
             connection = DriverManager.getConnection(
-                properties.getProperty("db.connection.url"),
-                properties.getProperty("db.user"),
-                properties.getProperty("db.password")
+                databaseProperties.getProperty("db.connection.url"),
+                databaseProperties.getProperty("db.user"),
+                databaseProperties.getProperty("db.password")
             )
         } catch (e: SQLException) {
             e.printStackTrace()
