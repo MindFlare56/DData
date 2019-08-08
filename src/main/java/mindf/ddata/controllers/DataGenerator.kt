@@ -1,7 +1,7 @@
-package controllers
+package mindf.ddata.controllers
 
 import org.reflections.Reflections
-import model.DData
+import mindf.ddata.model.DData
 
 object DataGenerator {
 

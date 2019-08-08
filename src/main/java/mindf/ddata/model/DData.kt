@@ -1,4 +1,4 @@
-package model
+package mindf.ddata.model
 
 @Target(AnnotationTarget.FIELD, AnnotationTarget.CLASS, AnnotationTarget.FILE)
 @Retention(AnnotationRetention.RUNTIME)

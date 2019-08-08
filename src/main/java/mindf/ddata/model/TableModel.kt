@@ -1,6 +1,5 @@
-package model
+package mindf.ddata.model
 
-import model.Row
 import java.util.*
 
 class TableModel {

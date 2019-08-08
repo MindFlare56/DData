@@ -1,4 +1,4 @@
-package controllers
+package mindf.ddata.controllers
 
 class DataStatement {
 

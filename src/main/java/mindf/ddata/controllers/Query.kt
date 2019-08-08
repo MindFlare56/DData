@@ -1,7 +1,7 @@
-package controllers
+package mindf.ddata.controllers
 
 import org.json.JSONObject
-import model.TableModel
+import mindf.ddata.model.TableModel
 import java.sql.ResultSet
 import kotlin.reflect.KMutableProperty1
 

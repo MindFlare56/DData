@@ -1,4 +1,4 @@
-package model
+package mindf.ddata.model
 
 open class DKey {
 

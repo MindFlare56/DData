@@ -1,3 +1,3 @@
-package model
+package mindf.ddata.model
 
 interface DataModel//todo make default method that give possibility to give a name for the table instead of using class name

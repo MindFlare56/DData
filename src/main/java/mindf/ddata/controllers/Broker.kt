@@ -1,8 +1,8 @@
-package controllers
+package mindf.ddata.controllers
 
+import Tools.Companion.readInstanceProperty
 import org.json.JSONObject
-import model.DData
-import utils.Tools.Companion.readInstanceProperty
+import mindf.ddata.model.DData
 import java.sql.ResultSet
 import kotlin.reflect.KMutableProperty1
 import kotlin.reflect.jvm.javaField

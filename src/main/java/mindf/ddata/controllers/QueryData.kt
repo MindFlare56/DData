@@ -1,12 +1,11 @@
-package controllers
+package mindf.ddata.controllers
 
-import utils.Tools.Companion.readInstanceProperty
-import model.DData
-import model.Row
-import model.TableModel
+import Tools.Companion.readInstanceProperty
+import mindf.ddata.model.DData
+import mindf.ddata.model.Row
+import mindf.ddata.model.TableModel
 import java.util.*
 import kotlin.reflect.KMutableProperty1
-import kotlin.reflect.full.instanceParameter
 import kotlin.reflect.jvm.javaField
 
 class QueryData {
