@@ -6,6 +6,7 @@ import java.io.IOException
 import java.sql.*
 import java.util.*
 import RunnableTask
+import kotlin.system.exitProcess
 
 class Database
 
@@ -142,8 +143,7 @@ internal constructor() {
             }
         } catch (e: IOException) {
             e.printStackTrace()
-            println("database.properties not found!")
-            System.exit(1)
+            throw IllegalArgumentException("database.properties file not found!")
         }
 
         return properties
